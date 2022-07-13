@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
 import javax.sql.DataSource;
 import javax.xml.crypto.Data;
 
+// bean 연결
 @Configuration
 public class SpringConfig {
 
