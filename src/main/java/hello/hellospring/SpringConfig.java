@@ -1,15 +1,13 @@
 package hello.hellospring;
 
-import hello.hellospring.repository.JdbcMemberRepository;
-import hello.hellospring.repository.JdbcTemplateMemberRepository;
-import hello.hellospring.repository.MemberRepository;
-import hello.hellospring.repository.MemoryMembmerRepository;
+import hello.hellospring.repository.*;
 import hello.hellospring.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.persistence.EntityManager;
 import javax.sql.DataSource;
 import javax.xml.crypto.Data;
 
@@ -17,11 +15,18 @@ import javax.xml.crypto.Data;
 @Configuration
 public class SpringConfig {
 
-    private DataSource dataSource;
+//    private DataSource dataSource;
+//
+//    @Autowired
+//    public SpringConfig(DataSource dataSource){
+//        this.dataSource = dataSource;
+//    }
 
-    @Autowired
-    public SpringConfig(DataSource dataSource){
-        this.dataSource = dataSource;
+    // JPA
+    private EntityManager em;
+
+    public SpringConfig(EntityManager em) {
+        this.em = em;
     }
 
     @Bean
@@ -33,7 +38,8 @@ public class SpringConfig {
     public MemberRepository memberRepository(){
 //        return new MemoryMembmerRepository();
 //        return new JdbcMemberRepository(dataSource);
-        return new JdbcTemplateMemberRepository(dataSource);
+//        return new JdbcTemplateMemberRepository(dataSource);
+        return new JpaMemberRepository(em);
     }
 
 
